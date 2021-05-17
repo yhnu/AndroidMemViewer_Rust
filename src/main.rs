@@ -42,9 +42,8 @@ fn adb_devices(adb: &str) -> Result<Vec<Devices>, &'static str> {
         let items : Vec<&str> = line.split("\t").collect();                
         println!("{:?}", items);
         if device_re.is_match(items[0]) {       
-            devices.push(Devices::new("sn", "sta"));
-            
-            // Devices::new(items[0], items[1]);
+
+            devices.push(Devices::new(items[0], items[1]));
             // Ok(Devices::new(items[0], items[1]))
         }
     }
