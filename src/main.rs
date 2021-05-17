@@ -7,16 +7,16 @@ enum CmdId {
     Start,
 }
 
-struct Devices<'a>{
-    pub sn: &'a str,
-    pub status: &'a str,
+struct Devices {
+    pub sn: String,
+    pub status: String,
 }
 
-impl<'a> Devices<'a> {
-    pub fn new(sn:&'a str, status:&'a str) -> Devices<'a> {
+impl Devices {
+    pub fn new(sn: &str, status: &str) -> Devices {
         Devices{
-            sn,
-            status
+            sn: String::from(sn),
+            status: String::from(status)
         }
     }
 }
@@ -34,7 +34,7 @@ fn adb<'a>() -> &'a str {
 }
 
 fn adb_devices(adb: &str) -> Result<Vec<Devices>, &'static str> {
-    let devices: Vec<Devices> = Vec::new();
+    let mut devices: Vec<Devices> = Vec::new();
 
     let out = Command::new(adb).arg("devices").output().unwrap().stdout;
     let device_re: Regex = Regex::new(r"^[0-9a-z]").unwrap();
